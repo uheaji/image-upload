@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios"; // axios는 HTTP비동기통신 라이브러리이다.
 import "./UploadForm.css";
+import { toast } from "react-toastify";
 
 
 
 const UploadForm = () => {
   const [file, setFile] = useState(null); 
-  const [fileName, setFileNAme] = useState("이미지 파일을 업로드 해주세요.");
+  const [fileName, setFileNAme] = useState("Select images to upload");
+  
 
   const imageSelectHandler = (event) => {
     const imageFile = event.target.files[0];
@@ -23,9 +25,10 @@ const UploadForm = () => {
         headers: {"Content-Type": "multipart/form-data"},
       });
       console.log({ res });
-      alert("Success !!")
+      toast.success("이미지 업로드 성공 😁");
     } catch (err) {
-      console.error(err)
+      console.error(err);
+      toast.error(err.message + " 😥");
     }
   };
   
