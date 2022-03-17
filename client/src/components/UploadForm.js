@@ -5,10 +5,10 @@ import { toast } from "react-toastify";
 import ProgressBar from "./ProgressBar";
 
 
-
 const UploadForm = () => {
   const defaultFileName = "Select images to upload ";
   const [file, setFile] = useState(null); 
+  const [imgSrc, setImgSrc] = useState(null);
   const [fileName, setFileNAme] = useState(defaultFileName);
   const [percent, setPercent] = useState(0);
   
@@ -17,6 +17,11 @@ const UploadForm = () => {
     const imageFile = event.target.files[0];
     setFile(imageFile);
     setFileNAme(imageFile.name)
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(imageFile);
+    fileReader.onload = (e) => {
+      setImgSrc(e.target.result);
+    }
   };
   
   const onSubmit = async (e) => {
@@ -35,21 +40,24 @@ const UploadForm = () => {
       setTimeout(() => {
         setPercent(0);
         setFileNAme(defaultFileName);
+        setImgSrc(null);
       }, 3000);
     } catch (err) {
       console.error(err);
       setPercent(0);
       setFileNAme(defaultFileName);
+      setImgSrc(null);
       toast.error(err.message + " 😥");
     }
   };
   
     return (
       <form onSubmit={onSubmit}>
+        <img className={`img-preview ${imgSrc && "img-preview-show"}`}src = {imgSrc} />
         <ProgressBar percent={percent} />
         <div className="file-dropper">
           {fileName}
-          <input id="image" type="file" onChange={imageSelectHandler} />
+          <input id="image" type="file" accept="image/jpeg" onChange={imageSelectHandler} />
         </div>
         <button className="submit-btn" type="submit">
           SUBMIT

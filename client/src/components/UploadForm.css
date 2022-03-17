@@ -33,3 +33,17 @@
     background-color:#94EB3E;
     cursor: pointer;
 }
+
+.img-preview {
+    width: 0%;
+    opacity: 0;
+    display: block;
+    margin: 0 auto 5px auto;
+    border-radius: 10px;
+}
+
+.img-preview-show {
+    width: 75%;
+    opacity: 1;
+    transition: 0.5s;
+}
