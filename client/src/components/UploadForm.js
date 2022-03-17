@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios"; // axios는 HTTP비동기통신 라이브러리이다.
+import "./UploadForm.css";
 
 
 
@@ -30,9 +31,22 @@ const UploadForm = () => {
   
     return (
       <form onSubmit={onSubmit}>
-            <label htmlFor="image">{fileName}</label>
-            <input id="image" type="file" onChange={imageSelectHandler}/>
-        <button type="submit">submit</button>
+        <div className="file-dropper">
+          {fileName}
+          <input id="image" type="file" onChange={imageSelectHandler} />
+        </div>
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            borderRadius: 10,
+            height: 40,
+            cursor: "pointer",
+            backgroundColor: "#94EB3E",
+          }}
+        >
+          SUBMIT
+        </button>
       </form>
     );
 }
