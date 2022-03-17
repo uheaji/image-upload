@@ -1,3 +1,4 @@
+// node.js에서는 모듈을 불러오기 위해 require()함수를 사용함.
 const express = require("express");
 const multer = require("multer");
 const { v4: uuid } = require("uuid");
@@ -18,11 +19,11 @@ const upload = multer({
 }); // upload는 미들웨어
 
 const app = express();
-const PORT = 5000;
+const PORT = 5000; // 5000포트에서 연결
 
 app.use(express.static("uploads")); // 외부에서 파일접근
 
-app.post('/upload', upload.single("imageTest"), (req, res) => {
+app.post('/upload', upload.single("image"), (req, res) => {
     console.log(req.file);
     res.json(req.file);
 });
