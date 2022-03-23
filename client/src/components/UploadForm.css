@@ -1,7 +1,7 @@
 .file-dropper {
     border: 1px dashed black;
     height: 200px;
-    background-color: #FFC81E;
+    background-color: #E1F6FA;
     border-radius: 20px;
     margin-bottom: 20px;
     display: flex;
@@ -19,7 +19,7 @@
 }
 
 .file-dropper:hover {
-    background-color: #A98B59;
+    background-color: #aaaaaa;
     transition: 0.5s;
     border-radius: 20px;
     color: white;
@@ -28,9 +28,9 @@
 .submit-btn {
     width: 100%;
     height: 40px;
-    border: 1px black;
+    border: 1px solid black;
     border-radius: 13px;
-    background-color:#94EB3E;
+    background-color:white;
     cursor: pointer;
 }
 

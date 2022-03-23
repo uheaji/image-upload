@@ -1,8 +1,10 @@
 // node.js에서는 모듈을 불러오기 위해 require()함수를 사용함.
+require("dotenv").config();
 const express = require("express");
 const multer = require("multer");
 const { v4: uuid } = require("uuid");
 const mime = require("mime-types")
+const mongoose = require("mongoose");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "./uploads"), // 파일 저장장소
@@ -21,11 +23,20 @@ const upload = multer({
 const app = express();
 const PORT = 5000; // 5000포트에서 연결
 
-app.use(express.static("uploads")); // 외부에서 파일접근
+// MongoDB 연결
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB Connect!");
+    app.use(express.static("uploads")); // 외부에서 파일접근
 
-app.post('/upload', upload.single("image"), (req, res) => {
-    console.log(req.file);
-    res.json(req.file);
-});
+    app.post("/upload", upload.single("image"), (req, res) =>
+      res.json(req.file)
+    );
 
-app.listen(PORT, () => console.log("Express server listening on PORT " + PORT));
+    app.listen(PORT, () =>
+      console.log("Express server listening on PORT " + PORT)
+    );
+  })
+  .catch((err) => console.log(err));
+

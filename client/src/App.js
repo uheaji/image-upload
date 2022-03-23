@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div>
       <ToastContainer />
-      <h2>🌻 PHOTO BOOK 🌻</h2>
+      <h2>☁ PHOTO BOOK ☁</h2>
       <UploadForm />
     </div>
   );
