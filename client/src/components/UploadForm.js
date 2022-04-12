@@ -29,7 +29,7 @@ const UploadForm = () => {
     const formData = new FormData();
     formData.append("image", file); // key-value 값으로 formData에 append
     try {
-      const res = await axios.post("/upload", formData, {
+      const res = await axios.post("/images", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: ( e ) => {
           setPercent(Math.round(100 * e.loaded / e.total));

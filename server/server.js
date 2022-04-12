@@ -32,15 +32,22 @@ mongoose
     console.log("MongoDB Connect!");
     app.use(express.static("uploads")); // 외부에서 파일접근
 
-    app.post("/upload", upload.single("image"), async(req, res) => {
-      await new Image(
+    // 사진정보 업로드
+    app.post("/images", upload.single("image"), async(req, res) => {
+      const image = await new Image(
         {
           key: req.file.filename,
           originalFileName: req.file.originalname
         }).save();
-        res.json(req.file);
+        res.json(image);
       }
     );
+
+    // 사진정보 불러오기
+    app.get("/images", async (req, res) => {
+      const images = await Image.find();
+      res.json(images);
+    })
 
     // http 서버 실행
     app.listen(PORT, () =>
