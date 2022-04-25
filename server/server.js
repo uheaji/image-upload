@@ -30,7 +30,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB Connect!");
-    app.use(express.static("uploads")); // 외부에서 파일접근
+    app.use('/uploads', express.static("uploads")); // 외부에서 파일접근
 
     // 사진정보 업로드
     app.post("/images", upload.single("image"), async(req, res) => {
