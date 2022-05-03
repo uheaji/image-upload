@@ -1,11 +1,13 @@
- import React, { useState } from "react";
+ import React, { useState, useContext } from "react";
 import axios from "axios"; // axios는 HTTP비동기통신 라이브러리이다.
 import "./UploadForm.css";
 import { toast } from "react-toastify";
 import ProgressBar from "./ProgressBar";
+import {ImageContext} from "../context/ImageContext"
 
 
-const UploadForm = ({images, setImages}) => {
+const UploadForm = () => {
+  const [images, setImages] = useContext(ImageContext);
   const defaultFileName = "Select images to upload ";
   const [file, setFile] = useState(null); 
   const [imgSrc, setImgSrc] = useState(null);

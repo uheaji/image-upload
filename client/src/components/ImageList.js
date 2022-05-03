@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios"; // 백엔드에서 호출할때 필요함 ❕
+import React, { useContext } from "react";
+import {ImageContext} from "../context/ImageContext"
 
-const IamgeList = ({images}) => {
+const IamgeList = () => {
+    const [images] = useContext(ImageContext);
     const imgList = images.map((image) => (
         <img key={image.key} style={{ width: "100%" }} src={`http://localhost:5000/uploads/${image.key}`} />
     ));
